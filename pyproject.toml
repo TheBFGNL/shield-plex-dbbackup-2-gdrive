@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "shield-plex-dbbackup-2-gdrive"
+version = "0.1.0"
+description = "Copy your the Plex database backups from your Shield (Pro) towards Google Drive for save keeping"
+authors = ["Matthijs de Jong"]
+license = "GPL-2.0"
+readme = "README.md"
+packages = [{include = "shield_plex_dbbackup_2_gdrive"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+smbprotocol = "^1.13.0"
+pydrive2 = {extras = ["fsspec"], version = "^1.19.0"}
+
+[tool.poetry.scripts]
+plexdb2gdrive = 'shield_plex_dbbackup_2_gdrive.main:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
