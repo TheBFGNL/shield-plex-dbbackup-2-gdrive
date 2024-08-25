@@ -8,9 +8,8 @@ readme = "README.md"
 packages = [{include = "shield_plex_dbbackup_2_gdrive"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 smbprotocol = "^1.13.0"
-pydrive2 = {extras = ["fsspec"], version = "^1.19.0"}
 
 [tool.poetry.scripts]
 plexdb2gdrive = 'shield_plex_dbbackup_2_gdrive.main:main'
