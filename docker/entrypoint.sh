@@ -13,4 +13,5 @@ groupmod -g "${GID}" plexdb2gdrive
 chown -R plexdb2gdrive:plexdb2gdrive /usr/src/app
 chown -R plexdb2gdrive:plexdb2gdrive /appl/data
 
-gosu plexdb2gdrive poetry run plexdb2gdrive $@
+su plexdb2gdrive -c "poetry run plexdb2gdrive ${@}"
+

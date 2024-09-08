@@ -1,9 +1,9 @@
 FROM python:3.12
 
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y gosu; \
-	rm -rf /var/lib/apt/lists/*
+# RUN set -eux; \
+# 	apt-get update; \
+# 	apt-get install -y gosu; \
+# 	rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash plexdb2gdrive
 
@@ -11,7 +11,6 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1
 
-# RUN apt update && apt upgrade -y
 RUN pip install poetry
 
 
@@ -26,6 +25,4 @@ COPY ./shield_plex_dbbackup_2_gdrive ./shield_plex_dbbackup_2_gdrive
 
 RUN poetry install
 
-# # ENTRYPOINT ["poetry", "run", "plexdb2gdrive"]
-# ENTRYPOINT [ "tail", "-f", "/dev/null" ]
 ENTRYPOINT [ "/bin/sh", "./entrypoint.sh" ]
