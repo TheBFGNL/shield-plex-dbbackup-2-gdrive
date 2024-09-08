@@ -1,0 +1,9 @@
+services:
+  plexdb2gdrive:
+    image: plexdb2gdrive
+    environment:
+      - UID=1000
+      - GID=1000
+    command: "abc123"
+    volumes:
+      - ./data:/appl/data
