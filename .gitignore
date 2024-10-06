@@ -1,3 +1,6 @@
 __pycache__
 settings.ini
 gdrive-secrets.json
+.env
+.mypy_cache
+.venv

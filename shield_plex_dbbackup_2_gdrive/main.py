@@ -1,13 +1,10 @@
-# /usr/bin/env python3
-import sys
+from shield_plex_dbbackup_2_gdrive.config_context.ConfigContext import ConfigContext
 
 
 def main():
-    print(f"Hello, {sys.argv[1]}!")
-    print("hello world")
-
-    with open("/appl/data/test.txt", "w") as f:
-        f.write("hello world")
+    print("Hello, World!")
+    config = ConfigContext()
+    print(config.shield_hostname)
 
 
 if __name__ == "__main__":
