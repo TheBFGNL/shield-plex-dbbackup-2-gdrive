@@ -1,10 +1,11 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class ConfigContext(BaseSettings):
-    load_dotenv()
-    model_config = SettingsConfigDict(env_prefix="SHIELDDB2GDRIVE_")
+    model_config = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8", env_prefix="SHIELDDB2GDRIVE_"
+    )
 
-    shield_hostname: str
+    shield_host: str
     shield_share: str

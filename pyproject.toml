@@ -10,10 +10,9 @@ packages = [{include = "shield_plex_dbbackup_2_gdrive"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 smbprotocol = "^1.13.0"
-python-dotenv = "^1.0.1"
-click = "^8.1.7"
 pydantic = "^2.9.2"
 pydantic-settings = "^2.5.2"
+argparse = "^1.4.0"
 
 [tool.poetry.scripts]
 plexdb2gdrive = 'shield_plex_dbbackup_2_gdrive.main:main'
@@ -25,6 +24,7 @@ mypy = "^1.11.2"
 bandit = "^1.7.10"
 isort = "^5.13.2"
 pytest = "^8.3.3"
+sphinx = "^8.1.1"
 
 [build-system]
 requires = ["poetry-core"]

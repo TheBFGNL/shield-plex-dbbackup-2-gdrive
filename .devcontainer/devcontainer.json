@@ -15,7 +15,8 @@
 			"version": "3.12",
 			"installTools": true,
 			"toolsToInstall": "poetry"
-		}
+		},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	
 	},
 	"postCreateCommand": "sudo dos2unix .devcontainer/post_create.sh && sh .devcontainer/post_create.sh",
