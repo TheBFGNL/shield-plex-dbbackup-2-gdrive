@@ -17,7 +17,8 @@ import argparse
 import logging
 import sys
 
-from shield_plex_dbbackup_2_gdrive.config_context.ConfigContext import ConfigContext
+from shield_plex_dbbackup_2_gdrive.config_context.ConfigContext import \
+    ConfigContext
 from shield_plex_dbbackup_2_gdrive.modes.copy_to_gdrive import copy_to_gdrive
 from shield_plex_dbbackup_2_gdrive.modes.restore import restore
 
