@@ -6,3 +6,4 @@ gdrive-secrets.json
 .venv
 .vscode
 crap
+.log
