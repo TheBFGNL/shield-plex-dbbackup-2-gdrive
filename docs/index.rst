@@ -13,3 +13,5 @@
 
 .. automodule:: shield_plex_dbbackup_2_gdrive.main
    :members:
+.. automodule:: shield_plex_dbbackup_2_gdrive.handlers.gdrive_handler
+   :members:

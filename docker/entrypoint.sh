@@ -11,7 +11,7 @@ usermod -u "${UID}" plexdb2gdrive
 groupmod -g "${GID}" plexdb2gdrive
 
 chown -R plexdb2gdrive:plexdb2gdrive /usr/src/app
-chown -R plexdb2gdrive:plexdb2gdrive /appl/data
+#chown -R plexdb2gdrive:plexdb2gdrive /appl/data
 
 su plexdb2gdrive -c "poetry run plexdb2gdrive ${@}"
 

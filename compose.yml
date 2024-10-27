@@ -1,9 +1,11 @@
 services:
   plexdb2gdrive:
     image: plexdb2gdrive
+    command: '"-m copy2gdrive"'
     environment:
       - UID=1000
       - GID=1000
-    command: "abc123"
+    env_file:
+      - .docker_env
     volumes:
-      - ./data:/appl/data
+      - ${LOCAL_WORKSPACE_FOLDER:-./}/data/gdrive_service_account.json:/appl/data/gdrive_service_account.json:ro

@@ -15,7 +15,7 @@ RUN pip install poetry
 
 
 WORKDIR /usr/src/app
-VOLUME [ "/appl/data" ]
+# VOLUME [ "/appl/data" ]
 
 COPY docker/entrypoint.sh .
 COPY ./poetry.lock .
