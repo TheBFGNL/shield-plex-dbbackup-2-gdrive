@@ -16,7 +16,7 @@ from google.oauth2 import service_account
 from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
     ConfigContext
 from shield_plex_dbbackup_2_gdrive.handlers import (gdrive_handler,
-                                                    shield_handler)
+                                                    smb_handler)
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +39,8 @@ def copy_to_gdrive(config_context: ConfigContext) -> None:
     """
     logger.info("Copying backup files to Google Drive...")
 
-    for file in shield_handler.get_files_at_shield(config_context):
+    for file in smb_handler.list_smb_files(config_context):
         logger.info("Copying %s to Google Drive...", file.file_name)
 
-    credentials = gdrive_handler.authenticate_with_service_account(config_context)
-    print(type(credentials))
+    gdrive_handler.list_gdrive_files(config_context)
+    

@@ -24,7 +24,9 @@ def set_smb_connection(config_context: ConfigContext) -> None:
     return None
 
 
-def get_files_at_shield(config_context: ConfigContext) -> Generator[BackupFile, None, None]:  # type: ignore[return]
+def list_smb_files(
+    config_context: ConfigContext,
+) -> Generator[BackupFile, None, None]:
 
     set_smb_connection(config_context)
 

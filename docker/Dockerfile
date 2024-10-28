@@ -25,4 +25,4 @@ COPY ./shield_plex_dbbackup_2_gdrive ./shield_plex_dbbackup_2_gdrive
 
 RUN poetry install
 
-ENTRYPOINT [ "/bin/sh", "./entrypoint.sh" ]
+ENTRYPOINT [ "/bin/bash", "./entrypoint.sh" ]
