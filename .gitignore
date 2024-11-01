@@ -4,6 +4,6 @@ __pycache__
 .venv
 .vscode
 crap
-.log
+*.log
 data/
 .docker_env
