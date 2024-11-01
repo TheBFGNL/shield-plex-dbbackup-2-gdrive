@@ -22,11 +22,12 @@ from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
     ConfigContext
 from shield_plex_dbbackup_2_gdrive.modes.copy_to_gdrive import copy_to_gdrive
 
+log_level = ConfigContext().log_level.upper()  # pylint: disable=no-member
 logger = logging.getLogger(__name__)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO,
+    level=getattr(logging, log_level, logging.INFO),
     handlers=[
         logging.FileHandler("shield_plex_dbbackup_2_gdrive.log"),
         logging.StreamHandler(sys.stdout),
@@ -48,8 +49,7 @@ def main() -> None:
     """
 
     logger.info("Starting Shield Plex DB Backup to Google Drive...")
-    print(sys.argv[1])
-    print(sys.argv[2])
+
     parser = argparse.ArgumentParser(
         description="Backup Plex @ Shield database backups to Google Drive"
     )
@@ -70,7 +70,7 @@ def main() -> None:
 
     match arguments.mode:
         case "copy2gdrive":
-            copy_to_gdrive(ConfigContext())
+            copy_to_gdrive()
         # case "restore":
         #     restore()
         case _:

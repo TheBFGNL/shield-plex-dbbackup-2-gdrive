@@ -7,3 +7,4 @@ crap
 *.log
 data/
 .docker_env
+config/

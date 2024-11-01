@@ -44,13 +44,15 @@ class ConfigContext(BaseSettings):
         env_file=".env", env_file_encoding="utf-8", env_prefix="SHIELDDB2GDRIVE_"
     )
 
-    logging_level: str = Field(default="INFO")
-    smb_logging_level: str = Field(default="WARNING")
+    log_level: str = Field(default="INFO")
+    smb_log_level: str = Field(default="WARNING")
+    googleapiclient_log_level: str = Field(default="WARNING")
     shield_host: str = Field()
     shield_user: str = Field()
     shield_pass: str = Field()
     shield_share: str = Field()
     shield_dbbackup_files_path: str = Field()
+    gdrive_root_folder: str = Field()
     gdrive_service_account_file: str = Field(
         default="/appl/data/gdrive_service_account.json"
     )
