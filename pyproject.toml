@@ -8,12 +8,45 @@ readme = "README.md"
 packages = [{include = "shield_plex_dbbackup_2_gdrive"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 smbprotocol = "^1.13.0"
-pydrive2 = {extras = ["fsspec"], version = "^1.19.0"}
+pydantic = "^2.9.2"
+pydantic-settings = "^2.5.2"
+argparse = "^1.4.0"
+google-api-python-client = "^2.149.0"
 
 [tool.poetry.scripts]
 plexdb2gdrive = 'shield_plex_dbbackup_2_gdrive.main:main'
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.1"
+black = "^24.8.0"
+mypy = "^1.11.2"
+bandit = "^1.7.10"
+isort = "^5.13.2"
+pytest = "^8.3.3"
+sphinx = "^8.1.1"
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+disable_error_code = "import-untyped"
+
+# for strict mypy: (this is the tricky one :-))
+disallow_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
 
 [build-system]
 requires = ["poetry-core"]
