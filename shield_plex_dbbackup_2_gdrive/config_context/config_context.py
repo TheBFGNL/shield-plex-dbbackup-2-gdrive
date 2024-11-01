@@ -52,7 +52,7 @@ class ConfigContext(BaseSettings):
     shield_pass: str = Field()
     shield_share: str = Field()
     shield_dbbackup_files_path: str = Field()
-    gdrive_root_folder: str = Field()
+    gdrive_root_folder_name: str = Field()
     gdrive_service_account_file: str = Field(
         default="/appl/data/gdrive_service_account.json"
     )

@@ -27,9 +27,23 @@ def build_service(credentials: service_account.Credentials) -> Resource:
 
     return service
 
+def get_root_folder_id() -> str:
+    
+        service = authenticate_with_service_account()
+
+        root_folder_name = ConfigContext().gdrive_root_folder_name
+        fields = "files(id)"
+
+        results = service.files().list(q=f"name='{root_folder_name}'", fields=fields).execute()  # pylint: disable=no-member
+        root_folder_id = results.get("files", [])
+
+        print(f"RootFolderID: {root_folder_id}")
+
+
 
 def list_gdrive_files() -> None:
 
+    get_root_folder_id()
     service = authenticate_with_service_account()
     fields = "files(id)"
 
