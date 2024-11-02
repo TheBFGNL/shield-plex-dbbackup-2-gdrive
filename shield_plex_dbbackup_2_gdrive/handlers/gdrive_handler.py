@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import Generator
 
 from google.oauth2 import service_account
 from googleapiclient.discovery import Resource, build
@@ -7,6 +8,10 @@ from googleapiclient.discovery import Resource, build
 from shield_plex_dbbackup_2_gdrive.classes.backup_file import BackupFile
 from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
     ConfigContext
+
+logging.getLogger("googleapiclient").setLevel(
+    getattr(logging, ConfigContext().googleapiclient_log_level, logging.WARNING)
+)
 
 
 def authenticate_with_service_account() -> service_account.Credentials:
@@ -58,17 +63,19 @@ def get_root_folder_id() -> str:
     return root_folder_id
 
 
-def list_gdrive_files() -> None:
+def list_gdrive_files() -> Generator[BackupFile, None, None]:
 
     root_folder_id = get_root_folder_id()
 
     service = build_service()
-    fields = "files(name, md5Checksum, id)"
-    q = f"parents='{root_folder_id}'"
+    fields = "files(name, id)"
+    q = f"parents='{root_folder_id}' and name contains 'com.plexapp.plugins.library'"
 
     # pylint: disable=no-member
     files = service.files().list(fields=fields, q=q).execute().get("files", [])
     # pylint: enable=no-member
 
     for file in files:
-        yield file
+        yield BackupFile(
+            file_name=file["name"], path=root_folder_id, file_system="gdrive"
+        )

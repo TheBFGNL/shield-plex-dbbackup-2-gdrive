@@ -14,4 +14,4 @@ security-check:
 check-all: lint-check type-check security-check
 
 clean-env-vars:
-	unset $(compgen -v | grep SHIELDDB2GDRIVE_)
+	unset $(compgen -v | grep SHIELDDB2GDRIVE)

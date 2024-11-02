@@ -51,5 +51,4 @@ def copy_to_gdrive() -> None:
     logger.info("Getting files on Google Drive")
     for file in gdrive_handler.list_gdrive_files():
         gdrive_file_list.append(file)
-
-        print(file)
+    logger.info("Found %s files on Google Drive", len(gdrive_file_list))
