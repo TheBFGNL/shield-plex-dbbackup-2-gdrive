@@ -12,3 +12,7 @@ security-check:
 	bandit -r shield_plex_dbbackup_2_gdrive
 
 check-all: lint-check type-check security-check
+
+fix-sh-scripts:
+	sudo dos2unix *.sh
+	sudo chmod +x *.sh
