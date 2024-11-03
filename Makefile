@@ -12,6 +12,3 @@ security-check:
 	bandit -r shield_plex_dbbackup_2_gdrive
 
 check-all: lint-check type-check security-check
-
-clean-env-vars:
-	unset $(compgen -v | grep SHIELDDB2GDRIVE)

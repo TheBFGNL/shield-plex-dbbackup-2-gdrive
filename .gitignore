@@ -3,7 +3,7 @@ __pycache__
 .mypy_cache
 .venv
 .vscode
-crap
+crap/
 *.log
 data/
 .docker_env

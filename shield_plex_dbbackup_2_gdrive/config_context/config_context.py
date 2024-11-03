@@ -45,7 +45,7 @@ class ConfigContext(BaseSettings):
     )
 
     log_level: str = Field(default="INFO")
-    smb_log_level: str = Field(default="WARNING")
+    smbprotocol_log_level: str = Field(default="WARNING")
     googleapiclient_log_level: str = Field(default="WARNING")
     shield_host: str = Field()
     shield_user: str = Field()

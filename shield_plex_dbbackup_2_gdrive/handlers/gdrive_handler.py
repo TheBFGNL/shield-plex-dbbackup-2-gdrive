@@ -1,16 +1,20 @@
 import logging
 import sys
+from io import BytesIO
 from typing import Generator
 
 from google.oauth2 import service_account
 from googleapiclient.discovery import Resource, build
+from googleapiclient.http import MediaIoBaseUpload
 
 from shield_plex_dbbackup_2_gdrive.classes.backup_file import BackupFile
 from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
     ConfigContext
 
+googleapiclient_log_level = ConfigContext().googleapiclient_log_level
+
 logging.getLogger("googleapiclient").setLevel(
-    getattr(logging, ConfigContext().googleapiclient_log_level, logging.WARNING)
+    getattr(logging, googleapiclient_log_level, logging.WARNING)
 )
 
 
@@ -79,3 +83,22 @@ def list_gdrive_files() -> Generator[BackupFile, None, None]:
         yield BackupFile(
             file_name=file["name"], path=root_folder_id, file_system="gdrive"
         )
+
+
+def upload_file(file: BackupFile, io_bytes: BytesIO) -> None:
+
+    root_folder_id = get_root_folder_id()
+    service = build_service()
+
+    file_metadata = {
+        "name": file.file_name,
+        "parents": [root_folder_id],
+    }
+
+    media = MediaIoBaseUpload(
+        io_bytes, mimetype="application/octet-stream", resumable=True
+    )
+
+    # pylint: disable=no-member
+    service.files().create(body=file_metadata, media_body=media).execute()
+    # pylint: enable=no-member
