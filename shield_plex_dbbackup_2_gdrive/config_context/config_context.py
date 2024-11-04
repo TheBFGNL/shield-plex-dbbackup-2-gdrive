@@ -1,58 +1,43 @@
 """
-config_context.py
-
-This module defines the `ConfigContext` class, which is used to manage configuration settings 
-for the Shield Plex DB Backup to Google Drive application. The configuration settings are 
-loaded from environment variables, with support for reading from a `.env` file.
+This module defines the ConfigContext class for managing configuration settings.
 
 Classes:
-    ConfigContext: A Pydantic BaseSettings subclass that defines the configuration settings 
-                   for the application.
-
-Attributes:
-    model_config (SettingsConfigDict): Configuration for loading settings from environment 
-                                       variables and `.env` file.
-    shield_host (str): The host address for the Shield service.
-    shield_user (str): The username for the Shield service.
-    shield_pass (str): The password for the Shield service.
-    shield_share (str): The share name for the Shield service.
-    shield_dbbackup_files_path (str): The file path for Shield database backup files.
+    ConfigContext: A Pydantic BaseSettings class for managing configuration settings
+                   from environment variables or a .env file.
 """
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class ConfigContext(BaseSettings):
     """
-    Configuration context for the Shield Plex DB Backup to Google Drive application.
-
-    This class uses Pydantic's BaseSettings to load configuration from environment variables
-    defined in a .env file. The environment variables are prefixed with 'SHIELDDB2GDRIVE_'.
+    A Pydantic BaseSettings class for managing configuration settings.
 
     Attributes:
-        shield_host (str): The host address of the Shield server.
-        shield_user (str): The username for accessing the Shield server.
-        shield_pass (str): The password for accessing the Shield server.
-        shield_share (str): The shared directory on the Shield server.
-        shield_dbbackup_files_path (str): The file path for Shield database backups.
-        logging_level (str): The logging level for the application. Default is 'INFO'.
-        smb_logging_level (str): The logging level for the SMB client. Default is 'WARNING'.
+        log_level (str): The logging level for the application.
+        smbprotocol_log_level (str): The logging level for the SMB protocol.
+        googleapiclient_log_level (str): The logging level for the Google API client.
+        shield_host (str): The hostname of the shield.
+        shield_user (str): The username for the shield.
+        shield_pass (str): The password for the shield.
+        shield_share (str): The share name on the shield.
+        shield_dbbackup_files_path (str): The path to the backup files on the shield.
+        gdrive_root_folder_name (str): The name of the root folder in Google Drive.
     """
 
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", env_prefix="SHIELDDB2GDRIVE_"
     )
 
-    log_level: str = Field(default="INFO")
-    smbprotocol_log_level: str = Field(default="WARNING")
-    googleapiclient_log_level: str = Field(default="WARNING")
-    shield_host: str = Field()
-    shield_user: str = Field()
-    shield_pass: str = Field()
-    shield_share: str = Field()
-    shield_dbbackup_files_path: str = Field()
-    gdrive_root_folder_name: str = Field()
+    log_level: str = Field(default="INFO", description="The logging level for the application.")
+    smbprotocol_log_level: str = Field(default="WARNING", description="The logging level for the SMB protocol.")
+    googleapiclient_log_level: str = Field(default="WARNING", description="The logging level for the Google API client.")
+    shield_host: str = Field(description="The hostname of the shield.")
+    shield_user: str = Field(description="The username for the shield.")
+    shield_pass: str = Field(description="The password for the shield.")
+    shield_share: str = Field(description="The share name on the shield.")
+    shield_dbbackup_files_path: str = Field(description="The path to the backup files on the shield.")
+    gdrive_root_folder_name: str = Field(description="The name of the root folder in Google Drive.")
     gdrive_service_account_file: str = Field(
         default="/appl/data/gdrive_service_account.json"
     )
