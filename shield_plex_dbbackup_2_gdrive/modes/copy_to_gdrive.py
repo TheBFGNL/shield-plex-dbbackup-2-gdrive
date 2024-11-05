@@ -1,8 +1,9 @@
 """
-Module for copying backup files to Google Drive.
-This module contains the function to copy backup files from an SMB share to Google Drive.
+This module provides the function to copy backup files from an SMB share to Google Drive.
+
 Functions:
-    copy_to_gdrive: Copies backup files from an SMB share to Google Drive.
+    copy_to_gdrive() -> None:
+        Copies backup files from an SMB share to Google Drive.
 """
 
 import logging
@@ -18,15 +19,16 @@ logger = logging.getLogger(__name__)
 def copy_to_gdrive() -> None:
     """
     Copies backup files from an SMB share to Google Drive.
+
     This function performs the following steps:
     1. Retrieves the list of files from the SMB share and logs the filenames.
     2. Retrieves the list of files from Google Drive.
     3. Identifies files that are present on the SMB share but not on Google Drive.
     4. Copies the missing files from the SMB share to Google Drive.
+
     Returns:
         None
     """
-
     shield_file_list: list[BackupFile] = []
     gdrive_file_list: list[BackupFile] = []
 

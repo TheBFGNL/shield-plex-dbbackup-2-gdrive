@@ -7,6 +7,7 @@ Classes:
 
 from pydantic import BaseModel
 
+
 class BackupFile(BaseModel):
     """
     A Pydantic BaseModel class for representing backup files.

@@ -1,3 +1,17 @@
+"""
+This module provides functions to interact with Google Drive.
+
+Functions:
+    authenticate_with_service_account() -> service_account.Credentials:
+        Authenticates with Google Drive using a service account.
+    get_root_folder_id(root_folder_name: str) -> str:
+        Retrieves the ID of the root folder in Google Drive.
+    list_gdrive_files() -> Generator[BackupFile, None, None]:
+        Lists files in Google Drive.
+    upload_file_to_gdrive(file: BackupFile, root_folder_id: str, service) -> None:
+        Uploads a file to Google Drive.
+"""
+
 import logging
 import sys
 from io import BytesIO
@@ -19,7 +33,12 @@ logging.getLogger("googleapiclient").setLevel(
 
 
 def authenticate_with_service_account() -> service_account.Credentials:
+    """
+    Authenticates with Google Drive using a service account.
 
+    Returns:
+        service_account.Credentials: The authenticated service account credentials.
+    """
     credentials = service_account.Credentials.from_service_account_file(
         ConfigContext().gdrive_service_account_file,
         scopes=["https://www.googleapis.com/auth/drive"],
@@ -29,20 +48,30 @@ def authenticate_with_service_account() -> service_account.Credentials:
 
 
 def build_service() -> Resource:
-
+    """
+    Builds and returns a Google Drive service resource.
+    This function authenticates using a service account and constructs
+    a Google Drive service resource using the Google API client library.
+    Returns:
+        Resource: A Google Drive service resource object.
+    """
     credentials = authenticate_with_service_account()
     service = build("drive", "v3", credentials=credentials)
-
     return service
 
 
-def get_root_folder_id() -> str:
+def get_root_folder_id(root_folder_name: str) -> str:
+    """
+    Retrieves the ID of the root folder in Google Drive.
 
+    Args:
+        root_folder_name (str): The name of the root folder.
+
+    Returns:
+        str: The ID of the root folder.
+    """
     service = build_service()
-
-    root_folder_name = ConfigContext().gdrive_root_folder_name
     fields = "files(id)"
-
     # pylint: disable=no-member
     root_folder_id = (
         service.files()
@@ -50,7 +79,7 @@ def get_root_folder_id() -> str:
         .execute()
         .get("files", [])
     )
-    # pylint: enable=no-member
+    # pylint: enable-no-member
 
     if not root_folder_id:
         logging.error("Root folder '%s' not found in Google Drive.", root_folder_name)
@@ -68,16 +97,19 @@ def get_root_folder_id() -> str:
 
 
 def list_gdrive_files() -> Generator[BackupFile, None, None]:
+    """
+    Lists files in Google Drive.
 
-    root_folder_id = get_root_folder_id()
-
+    Yields:
+        BackupFile: A file in Google Drive.
+    """
+    root_folder_id = get_root_folder_id(ConfigContext().gdrive_root_folder_name)
     service = build_service()
     fields = "files(name, id)"
     q = f"parents='{root_folder_id}' and name contains 'com.plexapp.plugins.library'"
-
     # pylint: disable=no-member
     files = service.files().list(fields=fields, q=q).execute().get("files", [])
-    # pylint: enable=no-member
+    # pylint: enable-no-member
 
     for file in files:
         yield BackupFile(
@@ -86,8 +118,17 @@ def list_gdrive_files() -> Generator[BackupFile, None, None]:
 
 
 def upload_file(file: BackupFile, io_bytes: BytesIO) -> None:
+    """
+    Uploads a file to Google Drive.
 
-    root_folder_id = get_root_folder_id()
+    Args:
+        file (BackupFile): The file to be uploaded.
+        io_bytes (BytesIO): The file content as a BytesIO object.
+
+    Returns:
+        None
+    """
+    root_folder_id = get_root_folder_id(ConfigContext().gdrive_root_folder_name)
     service = build_service()
 
     file_metadata = {
@@ -101,4 +142,4 @@ def upload_file(file: BackupFile, io_bytes: BytesIO) -> None:
 
     # pylint: disable=no-member
     service.files().create(body=file_metadata, media_body=media).execute()
-    # pylint: enable=no-member
+    # pylint: enable-no-member

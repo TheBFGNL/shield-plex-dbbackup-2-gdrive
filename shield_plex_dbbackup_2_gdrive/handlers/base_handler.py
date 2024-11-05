@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 """
 This module provides a function to identify files that are present on the shield but not on Google Drive.
 
@@ -5,9 +6,12 @@ Functions:
     not_on_gdrive(shield_file_list: list[BackupFile], gdrive_file_list: list[BackupFile]) -> Generator[BackupFile, None, None]:
         Returns a generator of files that are not on Google Drive.
 """
+# pylint: disable=line-too-long
 
 from typing import Generator
+
 from shield_plex_dbbackup_2_gdrive.classes.backup_file import BackupFile
+
 
 def not_on_gdrive(
     shield_file_list: list[BackupFile], gdrive_file_list: list[BackupFile]
