@@ -1,0 +1,10 @@
+__pycache__
+.env
+.mypy_cache
+.venv
+.vscode
+crap/
+*.log
+data/
+.docker_env
+config/
