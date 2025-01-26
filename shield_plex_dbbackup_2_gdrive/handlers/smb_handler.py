@@ -20,7 +20,6 @@ import smbprotocol
 from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 from shield_plex_dbbackup_2_gdrive.models.config import Config
 
-
 config = Config()
 logger = logging.getLogger(__name__)
 smbprotocol_log_level = config.smbprotocol_log_level
