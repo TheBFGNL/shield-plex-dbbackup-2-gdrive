@@ -18,11 +18,11 @@ import argparse
 import logging
 import sys
 
-from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
-    ConfigContext
+from shield_plex_dbbackup_2_gdrive.handlers import config_handler
 from shield_plex_dbbackup_2_gdrive.modes.copy_to_gdrive import copy_to_gdrive
 
-log_level = ConfigContext().log_level.upper()  # pylint: disable=no-member
+config = config_handler.load()
+log_level = config.log_level.upper()  # pylint: disable=no-member
 logger = logging.getLogger(__name__)
 
 logging.basicConfig(
