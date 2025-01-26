@@ -8,10 +8,10 @@ Functions:
 
 import logging
 
-from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 from shield_plex_dbbackup_2_gdrive.handlers import (base_handler,
                                                     gdrive_handler,
                                                     smb_handler)
+from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 
 logger = logging.getLogger(__name__)
 

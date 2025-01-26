@@ -21,8 +21,8 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import Resource, build
 from googleapiclient.http import MediaIoBaseUpload
 
-from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 from shield_plex_dbbackup_2_gdrive.handlers import config_handler
+from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 
 # from shield_plex_dbbackup_2_gdrive.config_context.config_context import \
 #     ConfigContext
