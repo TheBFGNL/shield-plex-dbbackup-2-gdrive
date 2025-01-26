@@ -19,7 +19,7 @@
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	
 	},
-	"postCreateCommand": "sudo dos2unix .devcontainer/post_create.sh && sh .devcontainer/post_create.sh",
+	"postCreateCommand": "sh .devcontainer/post_create.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
