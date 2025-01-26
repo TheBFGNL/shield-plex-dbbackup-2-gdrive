@@ -10,7 +10,7 @@ Functions:
 
 from typing import Generator
 
-from shield_plex_dbbackup_2_gdrive.classes.backup_file import BackupFile
+from shield_plex_dbbackup_2_gdrive.models.backup_file import BackupFile
 
 
 def not_on_gdrive(

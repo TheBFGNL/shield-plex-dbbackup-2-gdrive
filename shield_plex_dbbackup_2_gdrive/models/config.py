@@ -10,7 +10,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class ConfigContext(BaseSettings):
+class Config(BaseSettings):
     """
     A Pydantic BaseSettings class for managing configuration settings.
 
