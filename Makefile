@@ -13,6 +13,5 @@ security-check:
 
 check-all: lint-check type-check security-check
 
-fix-sh-scripts:
-	sudo dos2unix *.sh
-	sudo chmod +x *.sh
+activate-env:
+	poetry env activate
